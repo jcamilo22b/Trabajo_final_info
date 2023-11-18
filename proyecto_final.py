@@ -1,57 +1,47 @@
-#login
-# from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit 
-# from PyQt5.QtGui import QGuiApplication, QIcon
-# from PyQt5 import QtCore, QtWidgets
-# from PyQt5.uic import loadUi
-# from PyQt5.QtCore import Qt
-# import sys
+# #login
 
-# class Login(QMainWindow):
-#     def __init__(self):
-#         super(Login, self)._init_()
-#         loadUi('login.ui',self)
-
-######################################################
-# from PyQt5.QtWidgets import QMainWindow
-# from PyQt5.uic import loadUi
-
-# class Login(QMainWindow):
-#     def __init__(self):
-#         super(Login, self)._init_()
-#         loadUi('login.ui', self)
-
-# if __name__ == "__main__":
-#     import sys
-#     from PyQt5.QtWidgets import QApplication, QWidget
-
-#     app = QApplication(sys.argv)
-#     window = QWidget()
-#     window.show()
-#     sys.exit(app.exec_())
-#me aparece error con el qlineEdit , Qtcore
-
-###################################################
-
-from PyQt5.QtWidgets import QMainWindow
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QFrame, QHBoxLayout, QPushButton, QLabel, QLineEdit, QWidget, QMessageBox
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 from PyQt5.uic import loadUi
 
-class Login(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        super(Login, self).__init__()
-        loadUi('login.ui', self)
+        super(MainWindow, self).__init__()
+        loadUi("login.ui", self)  
+
+        
+        self.ingresar.clicked.connect(self.mostrar_datos)
+
+    def mostrar_datos(self):
+        
+        usuario = self.line_user.text()
+        contrasena = self.line_password.text()
+        
+     #Verificar 
+        if usuario == "medicoAnalista" and contrasena == "bio1234":
+            # abrir la ventana principal #############################################
+            print(" ESTEBAN SAPA") 
+            # meter aqui lo que sigueeeeeeeeeeeeeee
+        else:
+            # Credenciales incorrectas, mostrar un mensaje de error
+            print("Credenciales incorrectas")
+            self.mostrar_mensaje_error()
+
+    def mostrar_mensaje_error(self):
+        mensaje = QMessageBox()
+        mensaje.setIcon(QMessageBox.Warning)
+        mensaje.setWindowTitle("Error de autenticación")
+        mensaje.setText("Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.")
+        mensaje.exec_()
 
 if __name__ == "__main__":
-    import sys
-    from PyQt5.QtWidgets import QApplication
-
     app = QApplication(sys.argv)
-    login_window = Login()
-    login_window.show()
+    window = MainWindow()
+    window.show()
     sys.exit(app.exec_())
 
 
 
-
-
-#q
 
